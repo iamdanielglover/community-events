@@ -1,0 +1,13 @@
+
+
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="<%= Event.last.category.img_url %>" class="d-block w-100" alt="...">
+      <div class="hero-text">
+        <h1><%= Event.last.name %></h1>
+        <h3><%= Event.last.description %></h3>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<h1>Events</h1>
+<%= link_to "Create Event", new_event_path %>
+<%= link_to "User Index", users_path %><br>
+<br>
+<div class="card-deck">
+<% @events.each do |event| %>
+  <div class="card">
+    <img src="<%= event.category.img_url%>" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to event.name, event_path(event) %></h5>
+      <p class="card-text"><%= event.description %></p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted"><%= event.display_start %></small>
+    </div>
+  </div>
+  <% end %>
+</div>

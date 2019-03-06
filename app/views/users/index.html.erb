@@ -1,0 +1,10 @@
+<h1>Index Of Users</h1>
+<ul>
+  <% @users.each do |user| %>
+  <li><%= link_to user.name, user_path(user) %></li><br>
+  <% end %>
+</ul>
+
+<%= link_to "See Other Events", events_path %>
+<%= link_to "Create Event", new_event_path %>
+<%= link_to "Create User", new_user_path %>

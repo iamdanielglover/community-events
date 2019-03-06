@@ -1,0 +1,16 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"><%= @location.name %></h1>
+    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+  </div>
+</div>
+
+<h3>Total Events: <%= @location.events.length %> </h3>
+
+CALENDAR... <br>
+ACTS AS AN INDEX FOR LOCAL EVENTS
+<ul>
+  <% @location.events.each do |event| %>
+    <li><%= link_to event.name, event_path(event) %></li>
+  <% end %>
+</ul>
