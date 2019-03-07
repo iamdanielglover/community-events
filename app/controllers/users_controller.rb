@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authorize, except: [:new, :create]
 
   def index
     @users = User.all
@@ -11,9 +12,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save!
-      redirect_to users_path
+      session[:user_id] = @user.id
+      redirect_to '/'
     else
-      render :new
+      redirect_to '/signup'
     end
   end
 
@@ -21,18 +23,28 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def destroy
+  def active_events
     @user = User.find(params[:id])
-    if @user.destroy!
-      redirect_to users_path
-    else
-      render :show
-    end
+    @events = @user.active_events
   end
+
+  def expired_events
+    @user = User.find(params[:id])
+    @events = @user.expired_events
+  end
+
+  # def destroy
+  #   @user = User.find(params[:id])
+  #   if @user.destroy!
+  #     redirect_to users_path
+  #   else
+  #     render :show
+  #   end
+  # end
 
   private
 
   def user_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:username, :password, :password_confirmation)
   end
 end

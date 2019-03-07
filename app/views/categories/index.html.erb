@@ -1,8 +1,15 @@
 <h1>Categories</h1>
-<br>
-<ul>
+
+<div class="card-columns">
   <% @categories.each do |cat| %>
-    <li><%= link_to cat.name, category_path(cat)%></li><br>
-    <br>
-    <% end %>
-</ul>
+  <div class="card">
+    <a href="/categories/<%= cat.id %>">
+    <img src="<%= cat.img_url %>" class="card-img-top" alt="...">
+    </a>
+    <div class="card-body">
+      <h3 class="card-title"><%= cat.name %></h3>
+      <p class="card-text">Events Total: <%= cat.events.count %></p>
+    </div>
+  </div>
+  <% end %>
+</div>

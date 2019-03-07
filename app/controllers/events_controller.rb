@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :authorize
+
   def home
     @events = Event.all
   end
@@ -47,10 +49,9 @@ class EventsController < ApplicationController
 
   def adding_user #update
     @event = Event.find(params[:id])
-    @users = params["user_ids"].map do |id|
-      User.find(id)
+    params["user_ids"].map do |id|
+      @event.users << User.find(id)
     end
-    @event.users << @users
     @event.users = @event.users.uniq
     if @event.save!
       redirect_to event_path(@event)

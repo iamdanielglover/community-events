@@ -9,9 +9,21 @@ Rails.application.routes.draw do
     end
   end
   # post 'adding_user', action: :update, controller: 'events'
-  resources :users
+  resources :users do
+      member do
+        get 'active_events'
+        get 'expired_events'
+      end
+    end
   resources :categories
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/', to: 'events#home'
   get '/search', to: 'events#search'
+
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+  get '/max_to_min', to: 'locations#max_to_min'
 end
