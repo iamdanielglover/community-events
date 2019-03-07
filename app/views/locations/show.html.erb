@@ -1,16 +1,21 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4"><%= @location.name %></h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-  </div>
+<h1><%= @location.name.capitalize %></h1>
+
+<div class="center-me">
+    <small>Total Events: <%= @location.events.length %> - Ordered By Date</small>
 </div>
-
-<h3>Total Events: <%= @location.events.length %> </h3>
-
-CALENDAR... <br>
-ACTS AS AN INDEX FOR LOCAL EVENTS
-<ul>
-  <% @location.events.each do |event| %>
-    <li><%= link_to event.name, event_path(event) %></li>
+<button type="button" class="btn btn-light"><%= link_to "Add Event", new_event_path %></button>
+<div class="card-columns">
+<% @location.events_by_date.reverse.each do |event| %>
+  <div class="card">
+    <img src="<%= event.category.img_url %>" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to event.name, event_path(event) %></h5>
+      <p class="card-text"><%= event.description %></p>
+      <small><%= event.category.name %></small>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted"><%= event.display_start %></small>
+    </div>
+  </div>
   <% end %>
-</ul>
+</div>

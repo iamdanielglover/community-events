@@ -1,6 +1,17 @@
-<h1>Invitees for <%= @event.name %></h1>
-<ul>
+<h1>Currently Invited - <%= @event.name %></h1>
+
+<button type="button" class="btn btn-light"><%= link_to "Invite Users", add_user_event_path(@event) %></button>
+<button type="button" class="btn btn-light"><%= link_to "View User Index", users_path %></button>
+<button type="button" class="btn btn-light"><%= link_to "Create Event", new_event_path %></button>
+<button type="button" class="btn btn-light"><%= link_to "See Other Events", events_path %></button>
+
+<div class="list-group">
   <% @event.users.each do |user| %>
-  <li><%= link_to user.name, user_path(user) %></li><br>
-    <% end %>
-</ul>
+  <a href="/users/<%= user.id %>" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= user.username %></h5>
+    </div>
+    <small class="text-muted">Events Count: <%= user.events.count %></small>
+  </a>
+  <% end %>
+</div>

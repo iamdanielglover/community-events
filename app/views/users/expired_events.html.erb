@@ -1,21 +1,20 @@
-<h1><%= @user.username %></h1>
+<h1><%= @user.username %> - Expired Events  </h1>
 
 <button type="button" class="btn btn-light"><%= link_to "User Index", users_path %></button>
 <button type="button" class="btn btn-light"><%= link_to "Create Event", new_event_path %></button>
 <button type="button" class="btn btn-light"><%= link_to "See Active Events", active_events_user_path(@user.id) %></button>
-<button type="button" class="btn btn-light"><%= link_to "See Expired Events", expired_events_user_path(@user.id) %></button>
+<button type="button" class="btn btn-light"><%= link_to "All User Events", user_path(@user.id) %></button>
 <button type="button" class="btn btn-light"><%= link_to "Back To Events Index", events_path %></button>
 
-
 <!-- <div class="list-group"> -->
-  <% @user.events.each do |event| %>
+  <% @user.expired_events.each do |event| %>
   <a href="/events/<%= event.id%>" class="list-group-item list-group-item-action">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= event.name %></h5>
     </div>
     <small class="text-muted"><%= event.category.name %></small><br>
-      <small class="text-muted">Starts - <%= event.display_start %></small><br>
-      <small class="text-muted">Ends - <%= event.display_end %></small
+       <small class="text-muted">Starts - <%= event.display_start %></small><br>
+       <small class="text-muted">Ends - <%= event.display_end %></small
   </a>
   <% end %>
 <!-- </div> -->
